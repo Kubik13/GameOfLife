@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class GameOfLife extends JFrame {
+public class GameOfLife extends JFrame implements ActionListener{
     public JLabel aliveLabel = new JLabel();
     public JLabel generationLabel = new JLabel();
     public JToggleButton playToggleButton = new JToggleButton("Pause");
@@ -38,7 +38,7 @@ public class GameOfLife extends JFrame {
         buttonPanel.setBackground(Color.ORANGE);
         add(buttonPanel);
         playToggleButton.setName("PlayToggleButton");
-        playToggleButton.addActionListener(new PauseListener());
+        playToggleButton.addActionListener(this);
         buttonPanel.add(playToggleButton);
         JButton resetButton = new JButton("Reset");
         resetButton.setName("ResetButton");
@@ -73,27 +73,24 @@ public class GameOfLife extends JFrame {
         N = universe.getMap().length;
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (playToggleButton.getText().equals("Pause")) {
+            playToggleButton.setText("Play");
+            Main.setPause(true);
+        }
+        else {
+            playToggleButton.setText("Pause");
+            Main.setPause(false);
+            try {
 
-    public class PauseListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            if (playToggleButton.getText().equals("Pause")) {
-                playToggleButton.setText("Play");
-                Main.setPause(true);
+                Main.play();
+            } catch (InterruptedException ex) {
+                System.out.println("ERROR");
             }
-            else {
-                playToggleButton.setText("Pause");
-                Main.setPause(false);
-                try {
-
-                   Main.play();
-                } catch (InterruptedException ex) {
-                    System.out.println(ex);
-                }
-            }
-
         }
     }
+
 
     public class ResetListener implements ActionListener {
         @Override

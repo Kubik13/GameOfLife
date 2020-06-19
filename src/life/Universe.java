@@ -6,15 +6,6 @@ public class Universe {
     private String[][] map;
     private int N;
     private int alive = 0;
-    private boolean stacked = false;
-
-    public boolean isStacked() {
-        return stacked;
-    }
-
-    public void setStacked(boolean stacked) {
-        this.stacked = stacked;
-    }
 
     public int getAlive() {
         return alive;

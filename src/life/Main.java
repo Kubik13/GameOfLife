@@ -36,6 +36,5 @@ public class Main {
     }
 
     public static void reset(){
-        universe = new Universe(N,(new Random()).nextInt(100000));
     }
 }
